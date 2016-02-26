@@ -3,18 +3,22 @@ public class Cliente {
 	private double saldo;
 	private double gastosTotales;
 	Paquete paqueteMasCaro;
+	Integer cantidadDePaquetesComprados;
+
 	
 	
 	public Cliente() {
 		saldo = 0;
 		gastosTotales = 0;
 		paqueteMasCaro = null;
+		cantidadDePaquetesComprados = 0;
 	}
 	
 	public Cliente (double sueldo) {
 		saldo = sueldo;	
 		gastosTotales = 0;
 		paqueteMasCaro = null;
+		cantidadDePaquetesComprados = 0;
 	}
 	
 	public double getSaldoActual() {
@@ -29,14 +33,16 @@ public class Cliente {
 		return paqueteMasCaro;
 	}
 	
-	public void restarSaldo (Double monto, Double impuesto) {
-		Double precioDelPaquete = monto * (1+(impuesto/100));
-		gastosTotales = gastosTotales + precioDelPaquete;
-		saldo = saldo - precioDelPaquete;
+	public void restarSaldo (Double monto) {
+		saldo = saldo - monto;
+		gastosTotales+=monto;
 	}
 	
-	public void comprarPaquete(Paquete unPaquete, Double impuesto) {
-		this.restarSaldo(unPaquete.precioPaquete(), impuesto);
+	public Double getGastosTotales() {
+		return gastosTotales;
+	}
+	
+	public void setPaqueteMasCaro(Paquete unPaquete) {
 		if (paqueteMasCaro != null) {
 			if ( paqueteMasCaro.precioPaquete() < unPaquete.precioPaquete()) {
 				paqueteMasCaro = unPaquete;
@@ -44,6 +50,12 @@ public class Cliente {
 		} else {
 			paqueteMasCaro = unPaquete;
 		}
+	}
+	
+	public void comprarPaquete(Paquete unPaquete) {
+		this.restarSaldo(unPaquete.precioPaquete());
+		this.setPaqueteMasCaro(unPaquete);
+		cantidadDePaquetesComprados++;
 	}
 	
 	

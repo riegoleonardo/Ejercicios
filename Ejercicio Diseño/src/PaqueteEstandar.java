@@ -2,9 +2,11 @@
 public class PaqueteEstandar implements Paquete{
 		
 	private Double precioBase;
+	private Double impuesto;
 	
-	public PaqueteEstandar(Double unPrecio) {
+	public PaqueteEstandar(Double unPrecio, Double unImpuesto) {
 		precioBase = unPrecio;
+		impuesto = unImpuesto;
 	}
 
 	public Double getPrecioBase() {
@@ -16,7 +18,7 @@ public class PaqueteEstandar implements Paquete{
 	}
 
 	public double precioPaquete() {
-		return precioBase;
+		return (precioBase * (1 + impuesto/100)) ;
 	}
 	
 }

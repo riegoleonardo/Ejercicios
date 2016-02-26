@@ -2,10 +2,12 @@
 public class PaqueteHabitaciones implements Paquete {
 	private Integer cantidadHabitaciones;
 	private Double precioPorHabitacion;
+	private Double impuesto;
 	
-	public PaqueteHabitaciones(Integer unaCantidad, Double unPrecio) {
+	public PaqueteHabitaciones(Integer unaCantidad, Double unPrecio, Double unImpuesto) {
 		cantidadHabitaciones = unaCantidad;
 		precioPorHabitacion = unPrecio;
+		impuesto = unImpuesto;
 	}
 	
 	public Integer getCantidadHabitaciones() {
@@ -22,7 +24,7 @@ public class PaqueteHabitaciones implements Paquete {
 	}
 	
 	public double precioPaquete() {
-		return cantidadHabitaciones * precioPorHabitacion;
+		return (cantidadHabitaciones * precioPorHabitacion) * (1 + impuesto/100);
 	}
 	
 	
