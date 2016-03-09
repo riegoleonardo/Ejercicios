@@ -9,7 +9,7 @@ public class Main {
 		juan.comprarPaquete(paqueteEstandar);
 		System.out.println(juan.getSaldoActual());
 		juan.setSaldoActual(2000.0);
-		paqueteEstandar.setPrecioBase(100.0);
+		paqueteEstandar.setPrecioBase(10000.0);
 		juan.comprarPaquete(paqueteEstandar);
 		System.out.println(juan.getSaldoActual());
 		System.out.println(juan.getGastosTotales());

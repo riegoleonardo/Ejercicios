@@ -1,8 +1,17 @@
 
-public class SaldoInsuficienteException extends Exception {
+public class SaldoInsuficienteException extends RuntimeException {
 	
-    public SaldoInsuficienteException(String msg) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SaldoInsuficienteException(String msg) {
         super(msg);
     }
+	
+	public SaldoInsuficienteException(String msg, Exception e) {
+		super(msg, e);
+	}
 }
 

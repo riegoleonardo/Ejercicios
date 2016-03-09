@@ -1,9 +1,12 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Cliente {
-	private double saldo;
+	protected double saldo;
 	private double gastosTotales;
 	Paquete paqueteMasCaro;
 	Integer cantidadDePaquetesComprados;
+	private final static Logger LOGGER = LoggerFactory.getLogger(Cliente.class);
 
 	
 	
@@ -33,7 +36,10 @@ public class Cliente {
 		return paqueteMasCaro;
 	}
 	
-	public void restarSaldo (Double monto) {
+	public void restarSaldo (Double monto){
+		if(saldo < monto) {
+				throw new SaldoInsuficienteException("El saldo es insuficiente para realizar la operacion solicitada.");
+		}
 		saldo = saldo - monto;
 		gastosTotales+=monto;
 	}
@@ -53,9 +59,15 @@ public class Cliente {
 	}
 	
 	public void comprarPaquete(Paquete unPaquete) {
-		this.restarSaldo(unPaquete.precioPaquete());
-		this.setPaqueteMasCaro(unPaquete);
-		cantidadDePaquetesComprados++;
+		try {
+			this.restarSaldo(unPaquete.precioPaquete());
+			this.setPaqueteMasCaro(unPaquete);
+			cantidadDePaquetesComprados++;
+		} catch (SaldoInsuficienteException e){
+			LOGGER.error("Cuenta sin saldo", e);
+		} finally {
+			System.out.println(saldo);
+		}
 	}
 	
 	

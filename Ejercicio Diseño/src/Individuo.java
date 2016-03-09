@@ -1,23 +1,32 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Individuo extends Cliente {
 
 	Paquete paqueteReservado;
-	
+	private final static Logger LOGGER = LoggerFactory.getLogger(Cliente.class);
+
 	public void reservarPaquete(Paquete unPaquete) {
-		this.restarSaldo(unPaquete.precioPaquete()/2);
-		if (paqueteReservado == null) {
-			paqueteReservado = unPaquete;
-		} else {
-			System.out.println("No puede reservar más de un paquete");
+		try {
+			this.restarSaldo(unPaquete.precioPaquete() / 2);
+		} catch (Exception e) {
+			LOGGER.error("Saldo Insuficiente", e);
+		} finally {
+			System.out.println(saldo);
 		}
 	}
-	
+
 	public void comprarPaqueteReservado() {
-		this.restarSaldo(paqueteReservado.precioPaquete()/2);
-		this.setPaqueteMasCaro(paqueteReservado);
-		cantidadDePaquetesComprados++;
-		
+		try {
+			this.restarSaldo(paqueteReservado.precioPaquete() / 2);
+			this.setPaqueteMasCaro(paqueteReservado);
+			cantidadDePaquetesComprados++;
+		} catch (Exception e) {
+			LOGGER.error("Saldo insuficiente", e);
+		} finally {
+			System.out.println(saldo);
+		}
+
 	}
-	
-	
+
 }
