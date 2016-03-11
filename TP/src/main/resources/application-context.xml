@@ -16,11 +16,20 @@
 		<constructor-arg ref="jsonFactory" />
 	</bean>
 	
+	<bean id="cheapestDestinationsObteiner" class="com.despegar.jav.domain.CheapestDestinationsObtainer">
+		<constructor-arg ref="posibbleRoutesCalculator" />
+		<constructor-arg ref="cheapestDestinationConnector" />
+	</bean>
+	
+	<bean id="posibbleRoutesCalculator" class="com.despegar.jav.domain.PossibleRoutesCalculator" >
+		<constructor-arg ref="topRoutesReader" />
+	</bean>
+	
 	<bean id="bestTripsSerializer" class="com.despegar.jav.serializers.BestTripsSerializer" >
 		<constructor-arg ref="jsonFactory" />
 	</bean>
 	
-	<bean id="cheapestDestination" class="com.despegar.jav.domain.CheapestDestination">
+	<bean id="cheapestDestinationConnector" class="com.despegar.jav.domain.CheapestDestinationConnector">
 		<constructor-arg ref="httpRequestService"/>
 		<constructor-arg ref="destinationDeserializer" />
 	</bean>
@@ -28,13 +37,11 @@
 	<bean id="topRoutesReader" class="com.despegar.jav.example.TopRoutesReader" />
 	
 	<bean id="bestTrips" class="com.despegar.jav.domain.BestTrips" >
-		<constructor-arg ref="cheapestDestination" />
-		<constructor-arg ref="topRoutesReader" />
+		<constructor-arg ref="cheapestDestinationsObteiner" />
 	</bean>
 
 	<bean id="BestTripController" class="com.despegar.jav.controller.BestTripController" >
 		<constructor-arg ref="bestTrips" />
-		<constructor-arg ref="bestTripsSerializer" />
 	</bean>
 	
 	<bean id="webConfig" class="com.despegar.jav.WebConfig">

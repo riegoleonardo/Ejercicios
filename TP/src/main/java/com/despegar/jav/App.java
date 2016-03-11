@@ -1,15 +1,6 @@
 package com.despegar.jav;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.DispatcherServlet;
-
-import com.despegar.jav.domain.BestTrips;
-import com.despegar.jav.json.JsonFactory;
-
 import static org.eclipse.jetty.servlet.ServletContextHandler.NO_SESSIONS;
-
-import java.math.BigDecimal;
 
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;

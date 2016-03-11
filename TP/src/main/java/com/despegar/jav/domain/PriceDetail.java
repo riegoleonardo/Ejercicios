@@ -2,16 +2,14 @@ package com.despegar.jav.domain;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PriceDetail {
 	
-	private String currency;
-	@JsonProperty("adult_base")
-	private BigDecimal adultBase;
+//	private String currency;
+//	@JsonProperty("adult_base")
+//	private BigDecimal adultBase;
 	private BigDecimal total;
 
 //	@JsonCreator
@@ -29,21 +27,21 @@ public class PriceDetail {
 		this.total = total;
 	}
 
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public BigDecimal getAdultBase() {
-		return adultBase;
-	}
-
-	public void setAdultBase(BigDecimal adultBase) {
-		this.adultBase = adultBase;
-	}
+//	public String getCurrency() {
+//		return currency;
+//	}
+//
+//	public void setCurrency(String currency) {
+//		this.currency = currency;
+//	}
+//
+//	public BigDecimal getAdultBase() {
+//		return adultBase;
+//	}
+//
+//	public void setAdultBase(BigDecimal adultBase) {
+//		this.adultBase = adultBase;
+//	}
 	
 	
 }

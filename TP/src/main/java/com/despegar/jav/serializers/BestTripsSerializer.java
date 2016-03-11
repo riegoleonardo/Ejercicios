@@ -6,9 +6,9 @@ import com.despegar.jav.domain.BestTrips;
 import com.despegar.jav.json.JsonFactory;
 
 public class BestTripsSerializer {
-	
+
 	private JsonFactory jsonFactory;
-	
+
 	public BestTripsSerializer(JsonFactory jsonFactory) {
 		this.jsonFactory = jsonFactory;
 	}
@@ -17,7 +17,6 @@ public class BestTripsSerializer {
 		return jsonFactory;
 	}
 
-
 	public void setJsonFactory(JsonFactory jsonFactory) {
 		this.jsonFactory = jsonFactory;
 	}
@@ -25,9 +24,5 @@ public class BestTripsSerializer {
 	public String serialize(BestTrips bestTrips) {
 		return jsonFactory.toJson(bestTrips);
 	}
-
-
-	
-	
 
 }
