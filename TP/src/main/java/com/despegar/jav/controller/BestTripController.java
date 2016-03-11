@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.despegar.jav.domain.BestTrips;
 import com.despegar.jav.domain.ReadServiceException;
 import com.despegar.jav.domain.TripDTO;
+import com.despegar.jav.domain.User;
+import com.despegar.jav.error.MissingParametersError;
+import com.despegar.jav.error.NullParametersError;
 
 
 @Controller
@@ -36,7 +39,7 @@ public class BestTripController {
 	// }
 	//
 
-	@RequestMapping(value = "/best-trip", produces = "application/json")
+	@RequestMapping(value = "/best-trip", produces = "application/json;charset=UTF-8")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public TripDTO getBestTrips(@RequestParam(value = "from", required = true) String from,
@@ -44,31 +47,32 @@ public class BestTripController {
 		if ((from == null) || (from.length()<1) || (money == null)) {
 			throw new RuntimeException("");
 		} else {
-			return bestTrips.setBestTrips(from, money);
+			User aUser = new User(money, from);
+			return bestTrips.setBestTrips(from, money, aUser);
 		}
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(RuntimeException.class)
 	@ResponseBody
-	public String handleCustomExceptions(RuntimeException e) {
+	public NullParametersError handleCustomExceptions(RuntimeException e) {
 		LOGGER.error("One or more parameters is empty", e);
-		return "Ande!!!";
+		return new NullParametersError();
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	@ResponseBody
-	public String handleCustomExceptions(MissingServletRequestParameterException e) {
+	public MissingParametersError handleCustomExceptions(MissingServletRequestParameterException e) {
 		LOGGER.error("One or more parameters is missing", e);
-		return "Ande devuleta!!!";
+		return new MissingParametersError();
 	}
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(ReadServiceException.class)
 	@ResponseBody
-	public String handleCustomExceptions(ReadServiceException e) {
+	public InternalError handleCustomExceptions(ReadServiceException e) {
 		LOGGER.error("The URL provided is not responding", e);
-		return "Ande devuleta y devuelta!!!";
+		return new InternalError();
 	}
 }

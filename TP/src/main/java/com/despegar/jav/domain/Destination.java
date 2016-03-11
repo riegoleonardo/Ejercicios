@@ -2,73 +2,44 @@ package com.despegar.jav.domain;
 
 import java.math.BigDecimal;
 
+import com.despegar.jav.DTO.Hotel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Destination {
+	
+	private Hotel hotel;
+	private Travel travel;
 
-	private String country;
-	private String cityFrom;
-	private String cityTo;
-	private Flight flight;
-
-	public Flight getFlight() {
-		return flight;
+	public Destination(Travel travel, Hotel hotel) {
+		this.travel = travel;
+		this.hotel = hotel;
 	}
 
-	public void setFlight(Flight flight) {
-		this.flight = flight;
+	public Hotel getHotel() {
+		return hotel;
 	}
 
-	public Destination(String aCountry, String from, String to, Flight aFlight) {
-		country = aCountry;
-		cityFrom = from;
-		cityTo = to;
-		flight = aFlight;
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
 
-	public Destination() {
+	public Travel getTravel() {
+		return travel;
 	}
 
-	@JsonIgnore
-	public String getCountry() {
-		return country;
-	}
-
-	@JsonIgnore
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	@JsonIgnore
-	public String getCityFrom() {
-		return cityFrom;
-	}
-
-	@JsonIgnore
-	public void setCityFrom(String cityFrom) {
-		this.cityFrom = cityFrom;
-	}
-
-	public String getCityCode() {
-		return cityTo;
-	}
-
-	public void setCityCode(String cityTo) {
-		this.cityTo = cityTo;
-	}
-
-	@JsonIgnore
-	public BigDecimal getAmount() {
-		return flight.getAmount();
-	}
-
-	@JsonIgnore
-	public void setAmount(BigDecimal price) {
-		this.flight.setAmount(price);;
+	public void setTravel(Travel travel) {
+		this.travel = travel;
 	}
 	
 	@JsonIgnore
-	public String getAirline() {
-		return flight.getAirline();
+	public BigDecimal getAmount() {
+		return travel.getAmount().add(hotel.getPrice());
 	}
+	
+	public String getCityCode() {
+		return travel.getCityCode();
+	}
+	
+	
+
 }

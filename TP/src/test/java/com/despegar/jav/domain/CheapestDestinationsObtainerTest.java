@@ -19,13 +19,13 @@ public class CheapestDestinationsObtainerTest {
 	
 	private CheapestDestinationsObtainer cheapestDestinationsObtainer;
 	private PossibleRoutesCalculator possibleRoutesCalculator;
-	private CheapestTravelConnector cheapestDestinationConnector;
+	private ServiceConnector cheapestDestinationConnector;
 	private User user;
 
 	@Before
 	public void setUp() {
 		possibleRoutesCalculator = mock(PossibleRoutesCalculator.class);
-		cheapestDestinationConnector = mock(CheapestTravelConnector.class);
+		cheapestDestinationConnector = mock(ServiceConnector.class);
 		cheapestDestinationsObtainer = new CheapestDestinationsObtainer(cheapestDestinationConnector, possibleRoutesCalculator);
 		user = mock(User.class);
 	}

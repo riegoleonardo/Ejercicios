@@ -34,7 +34,7 @@ public class Travel {
 		return country;
 	}
 
-	@JsonIgnore
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
@@ -44,15 +44,15 @@ public class Travel {
 		return cityFrom;
 	}
 
-	@JsonIgnore
+
 	public void setCityFrom(String cityFrom) {
 		this.cityFrom = cityFrom;
 	}
-
+	
+	@JsonIgnore
 	public String getCityCode() {
 		return cityTo;
 	}
-
 
 	public void setCityCode(String cityTo) {
 		this.cityTo = cityTo;
@@ -63,7 +63,7 @@ public class Travel {
 		return flight.getAmount();
 	}
 
-	@JsonIgnore
+
 	public void setAmount(BigDecimal price) {
 		this.flight.setAmount(price);;
 	}

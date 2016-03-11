@@ -3,21 +3,22 @@ package com.despegar.jav.domain;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.despegar.jav.connector.ServiceConnector;
 import com.despegar.jav.example.TopRoute;
 
 public class CheapestDestinationsObtainer {
 
-	private CheapestTravelConnector cheapestTravelConnector;
+	private ServiceConnector serviceConnector;
 	private PossibleRoutesCalculator possibleRoutesCalculator;
 
-	public CheapestDestinationsObtainer(CheapestTravelConnector cheapestDestinationConnector,
+	public CheapestDestinationsObtainer(ServiceConnector serviceConnector,
 			PossibleRoutesCalculator possibleRoutesCalculator) {
-		this.cheapestTravelConnector = cheapestDestinationConnector;
+		this.serviceConnector = serviceConnector;
 		this.possibleRoutesCalculator = possibleRoutesCalculator;
 	}
 
-	public CheapestTravelConnector getCheapestDestinationConnector() {
-		return cheapestTravelConnector;
+	public ServiceConnector getServiceConnector() {
+		return serviceConnector;
 	}
 
 	public void setPossibleRoutesCalculator(PossibleRoutesCalculator possibleRoutesCalculator) {
@@ -28,8 +29,8 @@ public class CheapestDestinationsObtainer {
 		return possibleRoutesCalculator;
 	}
 
-	public void setCheapestDestinationConnector(CheapestTravelConnector cheapestDestinationConnector) {
-		this.cheapestTravelConnector = cheapestDestinationConnector;
+	public void setServiceConnector(ServiceConnector serviceConnector) {
+		this.serviceConnector = serviceConnector;
 	}
 
 	public void calculateCheapestDestinations(User user) {
@@ -37,7 +38,7 @@ public class CheapestDestinationsObtainer {
 		Boolean insufficientFunds = ((user.getWallet().compareTo(BigDecimal.valueOf(0)) == -1)
 				&& (user.getWallet().compareTo(BigDecimal.valueOf(0)) == 0));
 		while ((!insufficientFunds)) {
-			Travel cheapestDestination = this.getCheapestDestination(user, actualCity);
+			Destination cheapestDestination = this.getCheapestDestination(user, actualCity);
 			if (cheapestDestination != null) {
 				if (cheapestDestination.getAmount().compareTo(user.getWallet()) == -1) {
 					user.addDestination(cheapestDestination);
@@ -51,12 +52,12 @@ public class CheapestDestinationsObtainer {
 		}
 	}
 
-	public Travel getCheapestDestination(User user, String actualCity) {
+	public Destination getCheapestDestination(User user, String actualCity) {
 		List<TopRoute> possibleDestinations = possibleRoutesCalculator.getPossibleDestinations(actualCity);
 		BigDecimal lowestPrice = BigDecimal.valueOf(999999999);
-		Travel cheapestDestination = null;
+		Destination cheapestDestination = null;
 		for (TopRoute aRoute : possibleDestinations) {
-			Travel aDestination = cheapestTravelConnector.getCheapestTravel(aRoute.getFrom(),
+			Destination aDestination = serviceConnector.getCheapestDestination(aRoute.getFrom(),
 					aRoute.getTo());
 			if(aDestination != null) {
 				if ((aDestination.getAmount().compareTo(lowestPrice) == -1) && user.notVisitedDestination(aRoute.getTo())) {

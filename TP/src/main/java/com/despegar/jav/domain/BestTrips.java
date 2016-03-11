@@ -13,8 +13,8 @@ public class BestTrips {
 	public BestTrips() {
 	}
 
-	public TripDTO setBestTrips(String from, BigDecimal money) {
-		User aUser = new User(money, from);
+	public TripDTO setBestTrips(String from, BigDecimal money, User aUser) {
+		
 		cheapestDestinationsObtainer.calculateCheapestDestinations(aUser);
 		TripDTO aTrip = new TripDTO();
 		aTrip.setWallet(aUser.getWallet());

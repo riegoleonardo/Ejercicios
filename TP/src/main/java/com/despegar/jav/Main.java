@@ -1,6 +1,7 @@
 package com.despegar.jav;
 
 import com.despegar.jav.DTO.Hotel;
+import com.despegar.jav.connector.HotelsConnector;
 
 import java.io.InputStreamReader;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 import com.despegar.jav.DTO.Hotel;
 import com.despegar.jav.domain.BestTrips;
-import com.despegar.jav.domain.CheapestTravelConnector;
+
 import com.despegar.jav.domain.FlightsItem;
 import com.despegar.jav.domain.HttpRequestService;
 import com.despegar.jav.domain.Items;
@@ -20,7 +21,6 @@ import com.despegar.jav.example.TopRoutesReader;
 import com.despegar.jav.json.JsonFactory;
 import com.despegar.jav.serializers.DestinationDeserializer;
 import com.despegar.jav.serializers.HotelsDeserializer;
-import com.despesgar.jav.connector.HotelsConnector;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 public class Main {
@@ -59,8 +59,10 @@ public class Main {
 		
 		
 		for (Hotel aHotel : collecion) {
-			System.out.println(aHotel.getTitle());
+			System.out.println(jsonFactory.toJson(aHotel));
 		}
+		
+		
 		
 	}
 }

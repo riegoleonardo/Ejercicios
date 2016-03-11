@@ -8,7 +8,7 @@ public class User {
 	
 	private BigDecimal wallet;
 	private String from;
-	private List<Travel> visitedDestinations = new ArrayList<Travel>();
+	private List<Destination> visitedDestinations = new ArrayList<Destination>();
 	
 	public User(BigDecimal money, String aCity) {
 		wallet = money;
@@ -34,17 +34,17 @@ public class User {
 		this.from = from;
 	}
 
-	public List<Travel> getVisitedDestinations() {
+	public List<Destination> getVisitedDestinations() {
 		return visitedDestinations;
 	}
 
-	public void setVisitedDestinations(List<Travel> visitedDestinations) {
+	public void setVisitedDestinations(List<Destination> visitedDestinations) {
 		this.visitedDestinations = visitedDestinations;
 	}
 
-	public void addDestination(Travel aDestination) {
-			visitedDestinations.add(aDestination);
-			wallet = wallet.subtract(aDestination.getAmount());	
+	public void addDestination(Destination cheapestDestination) {
+			visitedDestinations.add(cheapestDestination);
+			wallet = wallet.subtract(cheapestDestination.getAmount());	
 	}
 	
 	public boolean notVisitedDestination(String actualCity) {

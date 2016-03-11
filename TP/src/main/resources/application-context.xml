@@ -12,13 +12,28 @@
 	
 	<bean id="httpRequestService" class="com.despegar.jav.domain.HttpRequestService" />
 	
+	<bean id="hotelsConnector" class="com.despegar.jav.connector.HotelsConnector" >
+		<constructor-arg ref="httpRequestService" />
+		<constructor-arg ref="hotelsDeserializer" />
+	</bean>
+	
+	<bean id="hotelsDeserializer" class="com.despegar.jav.serializers.HotelsDeserializer" >
+		<constructor-arg ref="jsonFactory" />
+	</bean>
+	
 	<bean id="destinationDeserializer" class="com.despegar.jav.serializers.DestinationDeserializer" >
 		<constructor-arg ref="jsonFactory" />
 	</bean>
 	
 	<bean id="cheapestDestinationsObteiner" class="com.despegar.jav.domain.CheapestDestinationsObtainer">
 		<constructor-arg ref="posibbleRoutesCalculator" />
-		<constructor-arg ref="cheapestDestinationConnector" />
+		<constructor-arg ref="serviceConnector" />
+	</bean>
+	
+	
+	<bean id="serviceConnector" class="com.despegar.jav.connector.ServiceConnector"> 
+		<constructor-arg ref="hotelsConnector" />
+		<constructor-arg ref="cheapestTravelConnector" />
 	</bean>
 	
 	<bean id="posibbleRoutesCalculator" class="com.despegar.jav.domain.PossibleRoutesCalculator" >
@@ -29,7 +44,7 @@
 		<constructor-arg ref="jsonFactory" />
 	</bean>
 	
-	<bean id="cheapestDestinationConnector" class="com.despegar.jav.domain.CheapestDestinationConnector">
+	<bean id="cheapestTravelConnector" class="com.despegar.jav.connector.CheapestTravelConnector">
 		<constructor-arg ref="httpRequestService"/>
 		<constructor-arg ref="destinationDeserializer" />
 	</bean>
